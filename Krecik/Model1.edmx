@@ -1,0 +1,887 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DostawcySet">
+          <Key>
+            <PropertyRef Name="Id_dostawcy" />
+          </Key>
+          <Property Name="Id_dostawcy" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazwa_pelna" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Nazwa_skrocona" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Imie" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Nazwisko" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Adres" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="NIP" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Uwagi" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Dostawy_szczegolySet">
+          <Key>
+            <PropertyRef Name="Id_dostawy" />
+          </Key>
+          <Property Name="Id_dostawy" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Etykieta_produktu" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Cena_pozycji" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Ilosc_dostarczonych" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Dostawy_Id_dostawy" Type="int" Nullable="false" />
+          <Property Name="Magazyn_glowny_Etykieta_produktu" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DostawySet">
+          <Key>
+            <PropertyRef Name="Id_dostawy" />
+          </Key>
+          <Property Name="Id_dostawy" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_dostawcy" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Data_odbioru" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Koszt" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Id_faktury" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Dostawcy_Id_dostawcy" Type="int" Nullable="false" />
+          <Property Name="Faktury_Id_faktury" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FakturyKlienci">
+          <Key>
+            <PropertyRef Name="Faktury_Id_faktury" />
+            <PropertyRef Name="Klienci_Id_klienta" />
+          </Key>
+          <Property Name="Faktury_Id_faktury" Type="int" Nullable="false" />
+          <Property Name="Klienci_Id_klienta" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FakturySet">
+          <Key>
+            <PropertyRef Name="Id_faktury" />
+          </Key>
+          <Property Name="Id_faktury" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_klienta" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Sposob_platnosci" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Termin_platnosci" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Data_wystawienia" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Status_faktury" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Typ_faktury" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Rozdaj_faktury" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Rabat" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Identyfikatory_produktowSet">
+          <Key>
+            <PropertyRef Name="Id_produktu" />
+          </Key>
+          <Property Name="Id_produktu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_kategorii" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Nazwa_produktu" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Wartosc_jednostkowa" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Wartosc_cechy" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Kategorie_produktow_Id_kategorii" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kategorie_produktowSet">
+          <Key>
+            <PropertyRef Name="Id_kategorii" />
+          </Key>
+          <Property Name="Id_kategorii" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Kategoria_nadrzedna" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Opis_kategorii" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Nazwa_cechy" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Wartość_cechy" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KlienciSet">
+          <Key>
+            <PropertyRef Name="Id_klienta" />
+          </Key>
+          <Property Name="Id_klienta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazwisko" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Imie" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Nazwa_firmy" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Kod_pocztowy" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Miasto" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Ulica" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Nr_domu" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Nr_lokalu" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Magazyn_glownySet">
+          <Key>
+            <PropertyRef Name="Etykieta_produktu" />
+          </Key>
+          <Property Name="Etykieta_produktu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_dostawcy" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Ilosc_na_stanie" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Id_kategorii" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Id_produktu" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Dostawcy_Id_dostawcy" Type="int" Nullable="false" />
+          <Property Name="Identyfikatory_produktow_Id_produktu" Type="int" Nullable="false" />
+          <Property Name="Kategorie_produktow_Id_kategorii" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ZamowieniaSet">
+          <Key>
+            <PropertyRef Name="Id_zamowienia" />
+          </Key>
+          <Property Name="Id_zamowienia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_klienta" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Id_produktu" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Etykieta_produktu" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Ilosc" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Kwota" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Id_faktury" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Data_zlozenia_zaowienia" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Data_zrealizowania_zamowienia" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Klienci_Id_klienta" Type="int" Nullable="false" />
+          <Property Name="Faktury_Id_faktury" Type="int" Nullable="false" />
+          <Property Name="Identyfikatory_produktow_Id_produktu" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view '25532460_1.dbo.Imiona_Klientow_View' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Imiona_Klientow_View">
+          <Key>
+            <PropertyRef Name="Imie" />
+          </Key>
+          <Property Name="Imie" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Liczba" Type="int" />
+        </EntityType>
+        <Association Name="FK_DostawcyDostawy">
+          <End Role="DostawcySet" Type="Self.DostawcySet" Multiplicity="1" />
+          <End Role="DostawySet" Type="Self.DostawySet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DostawcySet">
+              <PropertyRef Name="Id_dostawcy" />
+            </Principal>
+            <Dependent Role="DostawySet">
+              <PropertyRef Name="Dostawcy_Id_dostawcy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DostawcyMagazyn_glowny">
+          <End Role="DostawcySet" Type="Self.DostawcySet" Multiplicity="1" />
+          <End Role="Magazyn_glownySet" Type="Self.Magazyn_glownySet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DostawcySet">
+              <PropertyRef Name="Id_dostawcy" />
+            </Principal>
+            <Dependent Role="Magazyn_glownySet">
+              <PropertyRef Name="Dostawcy_Id_dostawcy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Dostawy_szczegolyDostawy">
+          <End Role="DostawySet" Type="Self.DostawySet" Multiplicity="1" />
+          <End Role="Dostawy_szczegolySet" Type="Self.Dostawy_szczegolySet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DostawySet">
+              <PropertyRef Name="Id_dostawy" />
+            </Principal>
+            <Dependent Role="Dostawy_szczegolySet">
+              <PropertyRef Name="Dostawy_Id_dostawy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FakturyDostawy">
+          <End Role="FakturySet" Type="Self.FakturySet" Multiplicity="1" />
+          <End Role="DostawySet" Type="Self.DostawySet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FakturySet">
+              <PropertyRef Name="Id_faktury" />
+            </Principal>
+            <Dependent Role="DostawySet">
+              <PropertyRef Name="Faktury_Id_faktury" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FakturyKlienci_Faktury">
+          <End Role="FakturySet" Type="Self.FakturySet" Multiplicity="1" />
+          <End Role="FakturyKlienci" Type="Self.FakturyKlienci" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FakturySet">
+              <PropertyRef Name="Id_faktury" />
+            </Principal>
+            <Dependent Role="FakturyKlienci">
+              <PropertyRef Name="Faktury_Id_faktury" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FakturyKlienci_Klienci">
+          <End Role="KlienciSet" Type="Self.KlienciSet" Multiplicity="1" />
+          <End Role="FakturyKlienci" Type="Self.FakturyKlienci" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KlienciSet">
+              <PropertyRef Name="Id_klienta" />
+            </Principal>
+            <Dependent Role="FakturyKlienci">
+              <PropertyRef Name="Klienci_Id_klienta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FakturyZamowienia">
+          <End Role="FakturySet" Type="Self.FakturySet" Multiplicity="1" />
+          <End Role="ZamowieniaSet" Type="Self.ZamowieniaSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FakturySet">
+              <PropertyRef Name="Id_faktury" />
+            </Principal>
+            <Dependent Role="ZamowieniaSet">
+              <PropertyRef Name="Faktury_Id_faktury" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Identyfikatory_produktowMagazyn_glowny">
+          <End Role="Identyfikatory_produktowSet" Type="Self.Identyfikatory_produktowSet" Multiplicity="1" />
+          <End Role="Magazyn_glownySet" Type="Self.Magazyn_glownySet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Identyfikatory_produktowSet">
+              <PropertyRef Name="Id_produktu" />
+            </Principal>
+            <Dependent Role="Magazyn_glownySet">
+              <PropertyRef Name="Identyfikatory_produktow_Id_produktu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Identyfikatory_produktowZamowienia">
+          <End Role="Identyfikatory_produktowSet" Type="Self.Identyfikatory_produktowSet" Multiplicity="1" />
+          <End Role="ZamowieniaSet" Type="Self.ZamowieniaSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Identyfikatory_produktowSet">
+              <PropertyRef Name="Id_produktu" />
+            </Principal>
+            <Dependent Role="ZamowieniaSet">
+              <PropertyRef Name="Identyfikatory_produktow_Id_produktu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kategorie_produktowIdentyfikatory_produktow">
+          <End Role="Kategorie_produktowSet" Type="Self.Kategorie_produktowSet" Multiplicity="1" />
+          <End Role="Identyfikatory_produktowSet" Type="Self.Identyfikatory_produktowSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategorie_produktowSet">
+              <PropertyRef Name="Id_kategorii" />
+            </Principal>
+            <Dependent Role="Identyfikatory_produktowSet">
+              <PropertyRef Name="Kategorie_produktow_Id_kategorii" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kategorie_produktowMagazyn_glowny">
+          <End Role="Kategorie_produktowSet" Type="Self.Kategorie_produktowSet" Multiplicity="1" />
+          <End Role="Magazyn_glownySet" Type="Self.Magazyn_glownySet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategorie_produktowSet">
+              <PropertyRef Name="Id_kategorii" />
+            </Principal>
+            <Dependent Role="Magazyn_glownySet">
+              <PropertyRef Name="Kategorie_produktow_Id_kategorii" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KlienciZamowienia">
+          <End Role="KlienciSet" Type="Self.KlienciSet" Multiplicity="1" />
+          <End Role="ZamowieniaSet" Type="Self.ZamowieniaSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KlienciSet">
+              <PropertyRef Name="Id_klienta" />
+            </Principal>
+            <Dependent Role="ZamowieniaSet">
+              <PropertyRef Name="Klienci_Id_klienta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Magazyn_glownyDostawy_szczegoly">
+          <End Role="Magazyn_glownySet" Type="Self.Magazyn_glownySet" Multiplicity="1" />
+          <End Role="Dostawy_szczegolySet" Type="Self.Dostawy_szczegolySet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Magazyn_glownySet">
+              <PropertyRef Name="Etykieta_produktu" />
+            </Principal>
+            <Dependent Role="Dostawy_szczegolySet">
+              <PropertyRef Name="Magazyn_glowny_Etykieta_produktu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="DeleteKlient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_klienta" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InsertNewKlient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nazwisko" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Imie" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Nazwa_firmy" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Kod_pocztowy" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Miasto" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Ulica" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Nr_domu" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Nr_lokalu" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <EntityContainer Name="Model1StoreContainer">
+          <EntitySet Name="DostawcySet" EntityType="Self.DostawcySet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dostawy_szczegolySet" EntityType="Self.Dostawy_szczegolySet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DostawySet" EntityType="Self.DostawySet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FakturyKlienci" EntityType="Self.FakturyKlienci" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FakturySet" EntityType="Self.FakturySet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Identyfikatory_produktowSet" EntityType="Self.Identyfikatory_produktowSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kategorie_produktowSet" EntityType="Self.Kategorie_produktowSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KlienciSet" EntityType="Self.KlienciSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Magazyn_glownySet" EntityType="Self.Magazyn_glownySet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ZamowieniaSet" EntityType="Self.ZamowieniaSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Imiona_Klientow_View" EntityType="Self.Imiona_Klientow_View" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Imiona_Klientow_View].[Imie] AS [Imie], 
+    [Imiona_Klientow_View].[Liczba] AS [Liczba]
+    FROM [dbo].[Imiona_Klientow_View] AS [Imiona_Klientow_View]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_DostawcyDostawy" Association="Self.FK_DostawcyDostawy">
+            <End Role="DostawcySet" EntitySet="DostawcySet" />
+            <End Role="DostawySet" EntitySet="DostawySet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DostawcyMagazyn_glowny" Association="Self.FK_DostawcyMagazyn_glowny">
+            <End Role="DostawcySet" EntitySet="DostawcySet" />
+            <End Role="Magazyn_glownySet" EntitySet="Magazyn_glownySet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Dostawy_szczegolyDostawy" Association="Self.FK_Dostawy_szczegolyDostawy">
+            <End Role="DostawySet" EntitySet="DostawySet" />
+            <End Role="Dostawy_szczegolySet" EntitySet="Dostawy_szczegolySet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FakturyDostawy" Association="Self.FK_FakturyDostawy">
+            <End Role="FakturySet" EntitySet="FakturySet" />
+            <End Role="DostawySet" EntitySet="DostawySet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FakturyKlienci_Faktury" Association="Self.FK_FakturyKlienci_Faktury">
+            <End Role="FakturySet" EntitySet="FakturySet" />
+            <End Role="FakturyKlienci" EntitySet="FakturyKlienci" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FakturyKlienci_Klienci" Association="Self.FK_FakturyKlienci_Klienci">
+            <End Role="KlienciSet" EntitySet="KlienciSet" />
+            <End Role="FakturyKlienci" EntitySet="FakturyKlienci" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FakturyZamowienia" Association="Self.FK_FakturyZamowienia">
+            <End Role="FakturySet" EntitySet="FakturySet" />
+            <End Role="ZamowieniaSet" EntitySet="ZamowieniaSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Identyfikatory_produktowMagazyn_glowny" Association="Self.FK_Identyfikatory_produktowMagazyn_glowny">
+            <End Role="Identyfikatory_produktowSet" EntitySet="Identyfikatory_produktowSet" />
+            <End Role="Magazyn_glownySet" EntitySet="Magazyn_glownySet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Identyfikatory_produktowZamowienia" Association="Self.FK_Identyfikatory_produktowZamowienia">
+            <End Role="Identyfikatory_produktowSet" EntitySet="Identyfikatory_produktowSet" />
+            <End Role="ZamowieniaSet" EntitySet="ZamowieniaSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kategorie_produktowIdentyfikatory_produktow" Association="Self.FK_Kategorie_produktowIdentyfikatory_produktow">
+            <End Role="Kategorie_produktowSet" EntitySet="Kategorie_produktowSet" />
+            <End Role="Identyfikatory_produktowSet" EntitySet="Identyfikatory_produktowSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kategorie_produktowMagazyn_glowny" Association="Self.FK_Kategorie_produktowMagazyn_glowny">
+            <End Role="Kategorie_produktowSet" EntitySet="Kategorie_produktowSet" />
+            <End Role="Magazyn_glownySet" EntitySet="Magazyn_glownySet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KlienciZamowienia" Association="Self.FK_KlienciZamowienia">
+            <End Role="KlienciSet" EntitySet="KlienciSet" />
+            <End Role="ZamowieniaSet" EntitySet="ZamowieniaSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Magazyn_glownyDostawy_szczegoly" Association="Self.FK_Magazyn_glownyDostawy_szczegoly">
+            <End Role="Magazyn_glownySet" EntitySet="Magazyn_glownySet" />
+            <End Role="Dostawy_szczegolySet" EntitySet="Dostawy_szczegolySet" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="Model1Container" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DostawySet" EntityType="Model1.Dostawy" />
+          <EntitySet Name="Dostawy_szczegolySet" EntityType="Model1.Dostawy_szczegoly" />
+          <AssociationSet Name="Dostawy_szczegolyDostawy" Association="Model1.Dostawy_szczegolyDostawy">
+            <End Role="Dostawy_szczegoly" EntitySet="Dostawy_szczegolySet" />
+            <End Role="Dostawy" EntitySet="DostawySet" />
+          </AssociationSet>
+          <EntitySet Name="Magazyn_glownySet" EntityType="Model1.Magazyn_glowny" />
+          <EntitySet Name="Kategorie_produktowSet" EntityType="Model1.Kategorie_produktow" />
+          <EntitySet Name="Identyfikatory_produktowSet" EntityType="Model1.Identyfikatory_produktow" />
+          <EntitySet Name="ZamowieniaSet" EntityType="Model1.Zamowienia" />
+          <EntitySet Name="DostawcySet" EntityType="Model1.Dostawcy" />
+          <EntitySet Name="KlienciSet" EntityType="Model1.Klienci" />
+          <EntitySet Name="FakturySet" EntityType="Model1.Faktury" />
+          <AssociationSet Name="DostawcyDostawy" Association="Model1.DostawcyDostawy">
+            <End Role="Dostawcy" EntitySet="DostawcySet" />
+            <End Role="Dostawy" EntitySet="DostawySet" />
+          </AssociationSet>
+          <AssociationSet Name="FakturyDostawy" Association="Model1.FakturyDostawy">
+            <End Role="Faktury" EntitySet="FakturySet" />
+            <End Role="Dostawy" EntitySet="DostawySet" />
+          </AssociationSet>
+          <AssociationSet Name="FakturyKlienci" Association="Model1.FakturyKlienci">
+            <End Role="Faktury" EntitySet="FakturySet" />
+            <End Role="Klienci" EntitySet="KlienciSet" />
+          </AssociationSet>
+          <AssociationSet Name="KlienciZamowienia" Association="Model1.KlienciZamowienia">
+            <End Role="Klienci" EntitySet="KlienciSet" />
+            <End Role="Zamowienia" EntitySet="ZamowieniaSet" />
+          </AssociationSet>
+          <AssociationSet Name="FakturyZamowienia" Association="Model1.FakturyZamowienia">
+            <End Role="Faktury" EntitySet="FakturySet" />
+            <End Role="Zamowienia" EntitySet="ZamowieniaSet" />
+          </AssociationSet>
+          <AssociationSet Name="Magazyn_glownyDostawy_szczegoly" Association="Model1.Magazyn_glownyDostawy_szczegoly">
+            <End Role="Magazyn_glowny" EntitySet="Magazyn_glownySet" />
+            <End Role="Dostawy_szczegoly" EntitySet="Dostawy_szczegolySet" />
+          </AssociationSet>
+          <AssociationSet Name="DostawcyMagazyn_glowny" Association="Model1.DostawcyMagazyn_glowny">
+            <End Role="Dostawcy" EntitySet="DostawcySet" />
+            <End Role="Magazyn_glowny" EntitySet="Magazyn_glownySet" />
+          </AssociationSet>
+          <AssociationSet Name="Identyfikatory_produktowMagazyn_glowny" Association="Model1.Identyfikatory_produktowMagazyn_glowny">
+            <End Role="Identyfikatory_produktow" EntitySet="Identyfikatory_produktowSet" />
+            <End Role="Magazyn_glowny" EntitySet="Magazyn_glownySet" />
+          </AssociationSet>
+          <AssociationSet Name="Identyfikatory_produktowZamowienia" Association="Model1.Identyfikatory_produktowZamowienia">
+            <End Role="Identyfikatory_produktow" EntitySet="Identyfikatory_produktowSet" />
+            <End Role="Zamowienia" EntitySet="ZamowieniaSet" />
+          </AssociationSet>
+          <AssociationSet Name="Kategorie_produktowMagazyn_glowny" Association="Model1.Kategorie_produktowMagazyn_glowny">
+            <End Role="Kategorie_produktow" EntitySet="Kategorie_produktowSet" />
+            <End Role="Magazyn_glowny" EntitySet="Magazyn_glownySet" />
+          </AssociationSet>
+          <AssociationSet Name="Kategorie_produktowIdentyfikatory_produktow" Association="Model1.Kategorie_produktowIdentyfikatory_produktow">
+            <End Role="Kategorie_produktow" EntitySet="Kategorie_produktowSet" />
+            <End Role="Identyfikatory_produktow" EntitySet="Identyfikatory_produktowSet" />
+          </AssociationSet>
+          <FunctionImport Name="InsertNewKlient">
+            <Parameter Name="Nazwisko" Mode="In" Type="String" />
+            <Parameter Name="Imie" Mode="In" Type="String" />
+            <Parameter Name="Nazwa_firmy" Mode="In" Type="String" />
+            <Parameter Name="Kod_pocztowy" Mode="In" Type="String" />
+            <Parameter Name="Miasto" Mode="In" Type="String" />
+            <Parameter Name="Ulica" Mode="In" Type="String" />
+            <Parameter Name="Nr_domu" Mode="In" Type="String" />
+            <Parameter Name="Nr_lokalu" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteKlient">
+          <Parameter Name="Id_klienta" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Imiona_Klientow_View" EntityType="Model1.Imiona_Klientow_View" />
+        </EntityContainer>
+        <EntityType Name="Dostawy">
+          <Key>
+            <PropertyRef Name="Id_dostawy" />
+          </Key>
+          <Property Name="Id_dostawy" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_dostawcy" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Data_odbioru" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Koszt" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Id_faktury" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Dostawy_szczegoly" Relationship="Model1.Dostawy_szczegolyDostawy" FromRole="Dostawy" ToRole="Dostawy_szczegoly" />
+          <NavigationProperty Name="Dostawcy" Relationship="Model1.DostawcyDostawy" FromRole="Dostawy" ToRole="Dostawcy" />
+          <NavigationProperty Name="Faktury" Relationship="Model1.FakturyDostawy" FromRole="Dostawy" ToRole="Faktury" />
+        </EntityType>
+        <EntityType Name="Dostawy_szczegoly">
+          <Key>
+            <PropertyRef Name="Id_dostawy" />
+          </Key>
+          <Property Name="Id_dostawy" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Etykieta_produktu" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Cena_pozycji" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Ilosc_dostarczonych" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Dostawy" Relationship="Model1.Dostawy_szczegolyDostawy" FromRole="Dostawy_szczegoly" ToRole="Dostawy" />
+          <NavigationProperty Name="Magazyn_glowny" Relationship="Model1.Magazyn_glownyDostawy_szczegoly" FromRole="Dostawy_szczegoly" ToRole="Magazyn_glowny" />
+        </EntityType>
+        <Association Name="Dostawy_szczegolyDostawy">
+          <End Type="Model1.Dostawy_szczegoly" Role="Dostawy_szczegoly" Multiplicity="1" />
+          <End Type="Model1.Dostawy" Role="Dostawy" Multiplicity="1" />
+        </Association>
+        <EntityType Name="Magazyn_glowny">
+          <Key>
+            <PropertyRef Name="Etykieta_produktu" />
+          </Key>
+          <Property Name="Etykieta_produktu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_dostawcy" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Ilosc_na_stanie" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Id_kategorii" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Id_produktu" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Dostawy_szczegoly" Relationship="Model1.Magazyn_glownyDostawy_szczegoly" FromRole="Magazyn_glowny" ToRole="Dostawy_szczegoly" />
+          <NavigationProperty Name="Dostawcy" Relationship="Model1.DostawcyMagazyn_glowny" FromRole="Magazyn_glowny" ToRole="Dostawcy" />
+          <NavigationProperty Name="Identyfikatory_produktow" Relationship="Model1.Identyfikatory_produktowMagazyn_glowny" FromRole="Magazyn_glowny" ToRole="Identyfikatory_produktow" />
+          <NavigationProperty Name="Kategorie_produktow" Relationship="Model1.Kategorie_produktowMagazyn_glowny" FromRole="Magazyn_glowny" ToRole="Kategorie_produktow" />
+        </EntityType>
+        <EntityType Name="Kategorie_produktow">
+          <Key>
+            <PropertyRef Name="Id_kategorii" />
+          </Key>
+          <Property Name="Id_kategorii" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Kategoria_nadrzedna" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Opis_kategorii" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Nazwa_cechy" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Wartość_cechy" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Magazyn_glowny" Relationship="Model1.Kategorie_produktowMagazyn_glowny" FromRole="Kategorie_produktow" ToRole="Magazyn_glowny" />
+          <NavigationProperty Name="Identyfikatory_produktow" Relationship="Model1.Kategorie_produktowIdentyfikatory_produktow" FromRole="Kategorie_produktow" ToRole="Identyfikatory_produktow" />
+        </EntityType>
+        <EntityType Name="Identyfikatory_produktow">
+          <Key>
+            <PropertyRef Name="Id_produktu" />
+          </Key>
+          <Property Name="Id_produktu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_kategorii" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Nazwa_produktu" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Wartosc_jednostkowa" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Wartosc_cechy" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Magazyn_glowny" Relationship="Model1.Identyfikatory_produktowMagazyn_glowny" FromRole="Identyfikatory_produktow" ToRole="Magazyn_glowny" />
+          <NavigationProperty Name="Zamowienia" Relationship="Model1.Identyfikatory_produktowZamowienia" FromRole="Identyfikatory_produktow" ToRole="Zamowienia" />
+          <NavigationProperty Name="Kategorie_produktow" Relationship="Model1.Kategorie_produktowIdentyfikatory_produktow" FromRole="Identyfikatory_produktow" ToRole="Kategorie_produktow" />
+        </EntityType>
+        <EntityType Name="Zamowienia">
+          <Key>
+            <PropertyRef Name="Id_zamowienia" />
+          </Key>
+          <Property Name="Id_zamowienia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_klienta" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Id_produktu" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Etykieta_produktu" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Ilosc" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Kwota" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Id_faktury" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Data_zlozenia_zaowienia" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Data_zrealizowania_zamowienia" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Klienci" Relationship="Model1.KlienciZamowienia" FromRole="Zamowienia" ToRole="Klienci" />
+          <NavigationProperty Name="Faktury" Relationship="Model1.FakturyZamowienia" FromRole="Zamowienia" ToRole="Faktury" />
+          <NavigationProperty Name="Identyfikatory_produktow" Relationship="Model1.Identyfikatory_produktowZamowienia" FromRole="Zamowienia" ToRole="Identyfikatory_produktow" />
+        </EntityType>
+        <EntityType Name="Dostawcy">
+          <Key>
+            <PropertyRef Name="Id_dostawcy" />
+          </Key>
+          <Property Name="Id_dostawcy" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazwa_pelna" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Nazwa_skrocona" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Imie" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Nazwisko" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Adres" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="NIP" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Uwagi" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Dostawy" Relationship="Model1.DostawcyDostawy" FromRole="Dostawcy" ToRole="Dostawy" />
+          <NavigationProperty Name="Magazyn_glowny" Relationship="Model1.DostawcyMagazyn_glowny" FromRole="Dostawcy" ToRole="Magazyn_glowny" />
+        </EntityType>
+        <EntityType Name="Klienci">
+          <Key>
+            <PropertyRef Name="Id_klienta" />
+          </Key>
+          <Property Name="Id_klienta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazwisko" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Imie" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Nazwa_firmy" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Kod_pocztowy" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Miasto" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Ulica" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Nr_domu" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Nr_lokalu" Type="String" Unicode="true" FixedLength="false" MaxLength="Max" />
+          <NavigationProperty Name="Faktury" Relationship="Model1.FakturyKlienci" FromRole="Klienci" ToRole="Faktury" />
+          <NavigationProperty Name="Zamowienia" Relationship="Model1.KlienciZamowienia" FromRole="Klienci" ToRole="Zamowienia" />
+        </EntityType>
+        <EntityType Name="Faktury">
+          <Key>
+            <PropertyRef Name="Id_faktury" />
+          </Key>
+          <Property Name="Id_faktury" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_klienta" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Sposob_platnosci" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Termin_platnosci" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Data_wystawienia" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Status_faktury" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Typ_faktury" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Rozdaj_faktury" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Rabat" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Dostawy" Relationship="Model1.FakturyDostawy" FromRole="Faktury" ToRole="Dostawy" />
+          <NavigationProperty Name="Klienci" Relationship="Model1.FakturyKlienci" FromRole="Faktury" ToRole="Klienci" />
+          <NavigationProperty Name="Zamowienia" Relationship="Model1.FakturyZamowienia" FromRole="Faktury" ToRole="Zamowienia" />
+        </EntityType>
+        <Association Name="DostawcyDostawy">
+          <End Type="Model1.Dostawcy" Role="Dostawcy" Multiplicity="1" />
+          <End Type="Model1.Dostawy" Role="Dostawy" Multiplicity="*" />
+        </Association>
+        <Association Name="FakturyDostawy">
+          <End Type="Model1.Faktury" Role="Faktury" Multiplicity="1" />
+          <End Type="Model1.Dostawy" Role="Dostawy" Multiplicity="*" />
+        </Association>
+        <Association Name="FakturyKlienci">
+          <End Type="Model1.Faktury" Role="Faktury" Multiplicity="*" />
+          <End Type="Model1.Klienci" Role="Klienci" Multiplicity="*" />
+        </Association>
+        <Association Name="KlienciZamowienia">
+          <End Type="Model1.Klienci" Role="Klienci" Multiplicity="1" />
+          <End Type="Model1.Zamowienia" Role="Zamowienia" Multiplicity="*" />
+        </Association>
+        <Association Name="FakturyZamowienia">
+          <End Type="Model1.Faktury" Role="Faktury" Multiplicity="1" />
+          <End Type="Model1.Zamowienia" Role="Zamowienia" Multiplicity="*" />
+        </Association>
+        <Association Name="Magazyn_glownyDostawy_szczegoly">
+          <End Type="Model1.Magazyn_glowny" Role="Magazyn_glowny" Multiplicity="1" />
+          <End Type="Model1.Dostawy_szczegoly" Role="Dostawy_szczegoly" Multiplicity="*" />
+        </Association>
+        <Association Name="DostawcyMagazyn_glowny">
+          <End Type="Model1.Dostawcy" Role="Dostawcy" Multiplicity="1" />
+          <End Type="Model1.Magazyn_glowny" Role="Magazyn_glowny" Multiplicity="*" />
+        </Association>
+        <Association Name="Identyfikatory_produktowMagazyn_glowny">
+          <End Type="Model1.Identyfikatory_produktow" Role="Identyfikatory_produktow" Multiplicity="1" />
+          <End Type="Model1.Magazyn_glowny" Role="Magazyn_glowny" Multiplicity="*" />
+        </Association>
+        <Association Name="Identyfikatory_produktowZamowienia">
+          <End Type="Model1.Identyfikatory_produktow" Role="Identyfikatory_produktow" Multiplicity="1" />
+          <End Type="Model1.Zamowienia" Role="Zamowienia" Multiplicity="*" />
+        </Association>
+        <Association Name="Kategorie_produktowMagazyn_glowny">
+          <End Type="Model1.Kategorie_produktow" Role="Kategorie_produktow" Multiplicity="1" />
+          <End Type="Model1.Magazyn_glowny" Role="Magazyn_glowny" Multiplicity="*" />
+        </Association>
+        <Association Name="Kategorie_produktowIdentyfikatory_produktow">
+          <End Type="Model1.Kategorie_produktow" Role="Kategorie_produktow" Multiplicity="1" />
+          <End Type="Model1.Identyfikatory_produktow" Role="Identyfikatory_produktow" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Imiona_Klientow_View">
+          <Key>
+            <PropertyRef Name="Imie" />
+          </Key>
+          <Property Name="Imie" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Liczba" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Model1StoreContainer" CdmEntityContainer="Model1Container">
+    <EntitySetMapping Name="DostawySet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Dostawy)">
+        <MappingFragment StoreEntitySet="DostawySet">
+          <ScalarProperty Name="Id_dostawy" ColumnName="Id_dostawy" />
+          <ScalarProperty Name="Id_dostawcy" ColumnName="Id_dostawcy" />
+          <ScalarProperty Name="Data_odbioru" ColumnName="Data_odbioru" />
+          <ScalarProperty Name="Koszt" ColumnName="Koszt" />
+          <ScalarProperty Name="Id_faktury" ColumnName="Id_faktury" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Dostawy_szczegolySet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Dostawy_szczegoly)">
+        <MappingFragment StoreEntitySet="Dostawy_szczegolySet">
+          <ScalarProperty Name="Id_dostawy" ColumnName="Id_dostawy" />
+          <ScalarProperty Name="Etykieta_produktu" ColumnName="Etykieta_produktu" />
+          <ScalarProperty Name="Cena_pozycji" ColumnName="Cena_pozycji" />
+          <ScalarProperty Name="Ilosc_dostarczonych" ColumnName="Ilosc_dostarczonych" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Magazyn_glownySet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Magazyn_glowny)">
+        <MappingFragment StoreEntitySet="Magazyn_glownySet">
+          <ScalarProperty Name="Etykieta_produktu" ColumnName="Etykieta_produktu" />
+          <ScalarProperty Name="Id_dostawcy" ColumnName="Id_dostawcy" />
+          <ScalarProperty Name="Ilosc_na_stanie" ColumnName="Ilosc_na_stanie" />
+          <ScalarProperty Name="Id_kategorii" ColumnName="Id_kategorii" />
+          <ScalarProperty Name="Id_produktu" ColumnName="Id_produktu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kategorie_produktowSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Kategorie_produktow)">
+        <MappingFragment StoreEntitySet="Kategorie_produktowSet">
+          <ScalarProperty Name="Id_kategorii" ColumnName="Id_kategorii" />
+          <ScalarProperty Name="Kategoria_nadrzedna" ColumnName="Kategoria_nadrzedna" />
+          <ScalarProperty Name="Opis_kategorii" ColumnName="Opis_kategorii" />
+          <ScalarProperty Name="Nazwa_cechy" ColumnName="Nazwa_cechy" />
+          <ScalarProperty Name="Wartość_cechy" ColumnName="Wartość_cechy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Identyfikatory_produktowSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Identyfikatory_produktow)">
+        <MappingFragment StoreEntitySet="Identyfikatory_produktowSet">
+          <ScalarProperty Name="Id_produktu" ColumnName="Id_produktu" />
+          <ScalarProperty Name="Id_kategorii" ColumnName="Id_kategorii" />
+          <ScalarProperty Name="Nazwa_produktu" ColumnName="Nazwa_produktu" />
+          <ScalarProperty Name="Wartosc_jednostkowa" ColumnName="Wartosc_jednostkowa" />
+          <ScalarProperty Name="Wartosc_cechy" ColumnName="Wartosc_cechy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ZamowieniaSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Zamowienia)">
+        <MappingFragment StoreEntitySet="ZamowieniaSet">
+          <ScalarProperty Name="Id_zamowienia" ColumnName="Id_zamowienia" />
+          <ScalarProperty Name="Id_klienta" ColumnName="Id_klienta" />
+          <ScalarProperty Name="Id_produktu" ColumnName="Id_produktu" />
+          <ScalarProperty Name="Etykieta_produktu" ColumnName="Etykieta_produktu" />
+          <ScalarProperty Name="Ilosc" ColumnName="Ilosc" />
+          <ScalarProperty Name="Kwota" ColumnName="Kwota" />
+          <ScalarProperty Name="Id_faktury" ColumnName="Id_faktury" />
+          <ScalarProperty Name="Data_zlozenia_zaowienia" ColumnName="Data_zlozenia_zaowienia" />
+          <ScalarProperty Name="Data_zrealizowania_zamowienia" ColumnName="Data_zrealizowania_zamowienia" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DostawcySet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Dostawcy)">
+        <MappingFragment StoreEntitySet="DostawcySet">
+          <ScalarProperty Name="Id_dostawcy" ColumnName="Id_dostawcy" />
+          <ScalarProperty Name="Nazwa_pelna" ColumnName="Nazwa_pelna" />
+          <ScalarProperty Name="Nazwa_skrocona" ColumnName="Nazwa_skrocona" />
+          <ScalarProperty Name="Imie" ColumnName="Imie" />
+          <ScalarProperty Name="Nazwisko" ColumnName="Nazwisko" />
+          <ScalarProperty Name="Adres" ColumnName="Adres" />
+          <ScalarProperty Name="NIP" ColumnName="NIP" />
+          <ScalarProperty Name="Uwagi" ColumnName="Uwagi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KlienciSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Klienci)">
+        <MappingFragment StoreEntitySet="KlienciSet">
+          <ScalarProperty Name="Id_klienta" ColumnName="Id_klienta" />
+          <ScalarProperty Name="Nazwisko" ColumnName="Nazwisko" />
+          <ScalarProperty Name="Imie" ColumnName="Imie" />
+          <ScalarProperty Name="Nazwa_firmy" ColumnName="Nazwa_firmy" />
+          <ScalarProperty Name="Kod_pocztowy" ColumnName="Kod_pocztowy" />
+          <ScalarProperty Name="Miasto" ColumnName="Miasto" />
+          <ScalarProperty Name="Ulica" ColumnName="Ulica" />
+          <ScalarProperty Name="Nr_domu" ColumnName="Nr_domu" />
+          <ScalarProperty Name="Nr_lokalu" ColumnName="Nr_lokalu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FakturySet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Faktury)">
+        <MappingFragment StoreEntitySet="FakturySet">
+          <ScalarProperty Name="Id_faktury" ColumnName="Id_faktury" />
+          <ScalarProperty Name="Id_klienta" ColumnName="Id_klienta" />
+          <ScalarProperty Name="Sposob_platnosci" ColumnName="Sposob_platnosci" />
+          <ScalarProperty Name="Termin_platnosci" ColumnName="Termin_platnosci" />
+          <ScalarProperty Name="Data_wystawienia" ColumnName="Data_wystawienia" />
+          <ScalarProperty Name="Status_faktury" ColumnName="Status_faktury" />
+          <ScalarProperty Name="Typ_faktury" ColumnName="Typ_faktury" />
+          <ScalarProperty Name="Rozdaj_faktury" ColumnName="Rozdaj_faktury" />
+          <ScalarProperty Name="Rabat" ColumnName="Rabat" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="Dostawy_szczegolyDostawy" TypeName="Model1.Dostawy_szczegolyDostawy" StoreEntitySet="Dostawy_szczegolySet">
+      <EndProperty Name="Dostawy">
+        <ScalarProperty Name="Id_dostawy" ColumnName="Dostawy_Id_dostawy" />
+      </EndProperty>
+      <EndProperty Name="Dostawy_szczegoly">
+        <ScalarProperty Name="Id_dostawy" ColumnName="Id_dostawy" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="DostawcyDostawy" TypeName="Model1.DostawcyDostawy" StoreEntitySet="DostawySet">
+      <EndProperty Name="Dostawcy">
+        <ScalarProperty Name="Id_dostawcy" ColumnName="Dostawcy_Id_dostawcy" />
+      </EndProperty>
+      <EndProperty Name="Dostawy">
+        <ScalarProperty Name="Id_dostawy" ColumnName="Id_dostawy" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FakturyDostawy" TypeName="Model1.FakturyDostawy" StoreEntitySet="DostawySet">
+      <EndProperty Name="Faktury">
+        <ScalarProperty Name="Id_faktury" ColumnName="Faktury_Id_faktury" />
+      </EndProperty>
+      <EndProperty Name="Dostawy">
+        <ScalarProperty Name="Id_dostawy" ColumnName="Id_dostawy" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FakturyKlienci" TypeName="Model1.FakturyKlienci" StoreEntitySet="FakturyKlienci">
+      <EndProperty Name="Faktury">
+        <ScalarProperty Name="Id_faktury" ColumnName="Faktury_Id_faktury" />
+      </EndProperty>
+      <EndProperty Name="Klienci">
+        <ScalarProperty Name="Id_klienta" ColumnName="Klienci_Id_klienta" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="KlienciZamowienia" TypeName="Model1.KlienciZamowienia" StoreEntitySet="ZamowieniaSet">
+      <EndProperty Name="Klienci">
+        <ScalarProperty Name="Id_klienta" ColumnName="Klienci_Id_klienta" />
+      </EndProperty>
+      <EndProperty Name="Zamowienia">
+        <ScalarProperty Name="Id_zamowienia" ColumnName="Id_zamowienia" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FakturyZamowienia" TypeName="Model1.FakturyZamowienia" StoreEntitySet="ZamowieniaSet">
+      <EndProperty Name="Faktury">
+        <ScalarProperty Name="Id_faktury" ColumnName="Faktury_Id_faktury" />
+      </EndProperty>
+      <EndProperty Name="Zamowienia">
+        <ScalarProperty Name="Id_zamowienia" ColumnName="Id_zamowienia" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="Magazyn_glownyDostawy_szczegoly" TypeName="Model1.Magazyn_glownyDostawy_szczegoly" StoreEntitySet="Dostawy_szczegolySet">
+      <EndProperty Name="Magazyn_glowny">
+        <ScalarProperty Name="Etykieta_produktu" ColumnName="Magazyn_glowny_Etykieta_produktu" />
+      </EndProperty>
+      <EndProperty Name="Dostawy_szczegoly">
+        <ScalarProperty Name="Id_dostawy" ColumnName="Id_dostawy" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="DostawcyMagazyn_glowny" TypeName="Model1.DostawcyMagazyn_glowny" StoreEntitySet="Magazyn_glownySet">
+      <EndProperty Name="Dostawcy">
+        <ScalarProperty Name="Id_dostawcy" ColumnName="Dostawcy_Id_dostawcy" />
+      </EndProperty>
+      <EndProperty Name="Magazyn_glowny">
+        <ScalarProperty Name="Etykieta_produktu" ColumnName="Etykieta_produktu" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="Identyfikatory_produktowMagazyn_glowny" TypeName="Model1.Identyfikatory_produktowMagazyn_glowny" StoreEntitySet="Magazyn_glownySet">
+      <EndProperty Name="Identyfikatory_produktow">
+        <ScalarProperty Name="Id_produktu" ColumnName="Identyfikatory_produktow_Id_produktu" />
+      </EndProperty>
+      <EndProperty Name="Magazyn_glowny">
+        <ScalarProperty Name="Etykieta_produktu" ColumnName="Etykieta_produktu" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="Identyfikatory_produktowZamowienia" TypeName="Model1.Identyfikatory_produktowZamowienia" StoreEntitySet="ZamowieniaSet">
+      <EndProperty Name="Identyfikatory_produktow">
+        <ScalarProperty Name="Id_produktu" ColumnName="Identyfikatory_produktow_Id_produktu" />
+      </EndProperty>
+      <EndProperty Name="Zamowienia">
+        <ScalarProperty Name="Id_zamowienia" ColumnName="Id_zamowienia" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="Kategorie_produktowMagazyn_glowny" TypeName="Model1.Kategorie_produktowMagazyn_glowny" StoreEntitySet="Magazyn_glownySet">
+      <EndProperty Name="Kategorie_produktow">
+        <ScalarProperty Name="Id_kategorii" ColumnName="Kategorie_produktow_Id_kategorii" />
+      </EndProperty>
+      <EndProperty Name="Magazyn_glowny">
+        <ScalarProperty Name="Etykieta_produktu" ColumnName="Etykieta_produktu" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="Kategorie_produktowIdentyfikatory_produktow" TypeName="Model1.Kategorie_produktowIdentyfikatory_produktow" StoreEntitySet="Identyfikatory_produktowSet">
+      <EndProperty Name="Kategorie_produktow">
+        <ScalarProperty Name="Id_kategorii" ColumnName="Kategorie_produktow_Id_kategorii" />
+      </EndProperty>
+      <EndProperty Name="Identyfikatory_produktow">
+        <ScalarProperty Name="Id_produktu" ColumnName="Id_produktu" />
+      </EndProperty>
+    </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="InsertNewKlient" FunctionName="Model1.Store.InsertNewKlient" />
+          <FunctionImportMapping FunctionImportName="DeleteKlient" FunctionName="Model1.Store.DeleteKlient" />
+          <EntitySetMapping Name="Imiona_Klientow_View">
+            <EntityTypeMapping TypeName="Model1.Imiona_Klientow_View">
+              <MappingFragment StoreEntitySet="Imiona_Klientow_View">
+                <ScalarProperty Name="Liczba" ColumnName="Liczba" />
+                <ScalarProperty Name="Imie" ColumnName="Imie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

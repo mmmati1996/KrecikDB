@@ -1,0 +1,129 @@
+﻿<Window x:Class="Krecik.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Krecik"
+        mc:Ignorable="d"
+        Title="Krecik DB" Height="600" Width="900" Closing="Window_Closing">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="299*"/>
+            <ColumnDefinition Width="210*"/>
+            <ColumnDefinition Width="383*"/>
+        </Grid.ColumnDefinitions>
+        <TabControl x:Name="tabControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.ColumnSpan="3">
+            <TabItem Header="TabItem">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="Klienci">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="89*"/>
+                        <ColumnDefinition Width="31*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="26*"/>
+                        <ColumnDefinition Width="731*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="RefreshButton" Content="Odśwież tabelę" HorizontalAlignment="Left" VerticalAlignment="Top" Width="174" Margin="10,10,0,0" Click="RefreshButton_Click" Grid.ColumnSpan="5"/>
+                    <Button x:Name="DodajKlientaBUTTON" Content="Dodaj nowego klienta" HorizontalAlignment="Left" VerticalAlignment="Top" Width="174" Margin="10,35,0,0" Grid.ColumnSpan="5" Click="DodajKlientaBUTTON_Click"/>
+                    <DataGrid x:Name="KlienciTable" x:Uid="KlienciTableUID" IsReadOnly="true" HorizontalAlignment="Left" Height="531" VerticalAlignment="Top" Width="668" Margin="52,0,0,0" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" Grid.Column="4" SelectionMode="Single">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding  Path=Id_klienta}" IsReadOnly="True" Header="ID_klienta" Width="Auto" />
+                            <DataGridTextColumn Binding="{Binding  Path=Nazwisko}" Header="Nazwisko" Width="Auto" />
+                            <DataGridTextColumn Binding="{Binding  Path=Imie}" Header="Imie" Width="Auto" />
+                            <DataGridTextColumn Binding="{Binding  Path=Nazwa_firmy}" Header="Nazwa_firmy" Width="Auto" />
+                            <DataGridTextColumn Binding="{Binding  Path=Kod_pocztowy}" Header="Kod_pocztowy" Width="Auto" />
+                            <DataGridTextColumn Binding="{Binding  Path=Miasto}" Header="Miasto" Width="Auto" />
+                            <DataGridTextColumn Binding="{Binding  Path=Ulica}" Header="Ulica" Width="Auto" />
+                            <DataGridTextColumn Binding="{Binding  Path=Nr_domu}" Header="Nr_domu" Width="Auto" />
+                            <DataGridTextColumn Binding="{Binding  Path=Nr_lokalu}" Header="Nr_lokalu" Width="Auto" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button x:Name="UsunKlientaButton" Content="Usuń zaznaczonego klienta" HorizontalAlignment="Left" VerticalAlignment="Top" Width="174" Margin="10,60,0,0" Grid.ColumnSpan="5" Click="UsunKlientaButton_Click"/>
+                    <Button x:Name="EdytujKlientaButton" Content="Edytuj zaznaczonego klienta" HorizontalAlignment="Left" VerticalAlignment="Top" Width="174" Margin="10,85,0,0" Grid.ColumnSpan="5" Click="EdytujKlientaButton_Click"/>
+                    <Label x:Name="label" Content="Funkcje za pomocą procedur:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,110,0,0" Grid.ColumnSpan="5" Width="174"/>
+                    <Button x:Name="UsunKlientaProcedureButton" Content="Usun zaznaczonego klienta" HorizontalAlignment="Left" VerticalAlignment="Top" Width="174" Margin="10,141,0,0" Grid.ColumnSpan="5" Click="UsunKlientaProcedureButton_Click"/>
+                    <Button x:Name="PokazWidok1Button" Content="Pokaż widok klientów" HorizontalAlignment="Left" VerticalAlignment="Top" Width="174" Margin="10,511,0,0" Grid.ColumnSpan="5" Click="PokazWidok1Button_Click"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Faktury">
+                <Grid Background="#FFE5E5E5">
+                    <TabControl TabStripPlacement="Left">
+                        <TabItem Header="Nowa faktura">
+                            <Grid Background="#FFE5E5E5">
+                                <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="291" Margin="0,46,0,0" Stroke="Black" VerticalAlignment="Top" Width="752"/>
+                                <TextBox x:Name="NrFaktury" HorizontalAlignment="Left" Height="37" Margin="99,4,0,0" TextWrapping="Wrap" VerticalAlignment="Top"  Width="306" RenderTransformOrigin="0.488,-2.049" FontSize="20"/>
+                                <TextBox HorizontalAlignment="Left" Height="23" Margin="0,68,0,0" TextWrapping="Wrap" Text="Numer klienta" VerticalAlignment="Top" Width="99" RenderTransformOrigin="0.488,-2.049"/>
+                                <TextBox HorizontalAlignment="Left" Height="23" Margin="70,199,0,0" TextWrapping="Wrap" Text="Termin płatności" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.488,-2.049"/>
+                                <TextBox HorizontalAlignment="Left" Height="23" Margin="81,259,0,0" TextWrapping="Wrap" Text="Data wystawienia" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.488,-2.049"/>
+                                <ListBox HorizontalAlignment="Left" Height="64" Margin="291,182,0,0" VerticalAlignment="Top" Width="100">
+                                    <ListBoxItem Content="Gotówka"/>
+                                    <ListBoxItem Content="Karta"/>
+                                    <ListBoxItem Content="Przelew"/>
+                                </ListBox>
+                                <ComboBox x:Name="TypFaktury" Height="37" Margin="495,0,0,0" VerticalAlignment="Top" Width="133" RenderTransformOrigin="2.146,1.909" HorizontalAlignment="Left" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Disabled" FontSize="20">
+                                    <ComboBoxItem Content="Proforma" FontSize="20" Height="30"/>
+                                    <ComboBoxItem Content="VAT" FontSize="20" Height="30" IsSelected="True"/>
+                                    <ComboBoxItem Content="Korygująca" FontSize="20" Height="30"/>
+                                </ComboBox>
+                                <ListBox HorizontalAlignment="Left" Height="55" Margin="368,100,0,0" VerticalAlignment="Top" Width="109" RenderTransformOrigin="2.146,1.909">
+                                    <ListBoxItem Content="Opłacona"/>
+                                    <ListBoxItem Content="Nieopłacona"/>
+                                </ListBox>
+                                <TextBox HorizontalAlignment="Left" Height="23" Margin="508,167,0,0" TextWrapping="Wrap" Text="Rabat" VerticalAlignment="Top" Width="120"/>
+                                <Label Content="Nr faktury" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20"/>
+                                <Label Content="Faktura" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" RenderTransformOrigin="2.898,2.683" Margin="410,0,0,0"/>
+                                <Label Content="Odbiorca faktury:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-2,42,0,0"/>
+                                <ComboBox x:Name="ComboBoxKlienci" HorizontalAlignment="Left" Margin="70,112,0,0" VerticalAlignment="Top" Width="120" />
+
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Wszystkie faktury" />
+                        <TabItem Header="Faktury nieopłacone" />
+                    </TabControl>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Kategorie produktów">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="KategorieProduktowView" x:Uid="KategorieProduktowID" HorizontalAlignment="Left" Height="521" Margin="229,10,0,0" VerticalAlignment="Top" Width="647" IsReadOnly="True" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" SelectionMode="Single"/>
+                    <Button Name="KategoriaProduktowOdswiez" Content="Odśwież" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="214" Click="KategoriaProduktowOdswiez_Click"/>
+                    <Button x:Name="DodajKategorieButton" Content="Dodaj nową kategorie" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="214" Click="DodajKategorieButton_Click"/>
+                    <Button x:Name="EdytujKategorieButton" Content="Edytuj kategorie" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" Width="214" Click="EdytujKategorieButton_Click"/>
+                    <Button x:Name="UsunKategorieButton" Content="Usuń kategorie" HorizontalAlignment="Left" Margin="10,85,0,0" VerticalAlignment="Top" Width="214" Click="UsunKategorieButton_Click"/>
+                </Grid>
+            </TabItem>
+            
+            
+            
+            
+            
+            
+            
+            
+            <TabItem Name="AdminPanel" Header="Admin Panel" Visibility="Visible">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid Name="MongoLog" HorizontalAlignment="Left" Height="521" Margin="181,10,0,0" VerticalAlignment="Top" Width="695" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding  Path=login}" Header="Login" Width="Auto" />
+                            <DataGridTextColumn Binding="{Binding  Path=permission}" Header="Dostep" Width="Auto" />
+                            <DataGridTextColumn Binding="{Binding  Path=czaszal}" Header="Czas zalogowania" Width="Auto" />
+                            <DataGridTextColumn Binding="{Binding  Path=czaswyl}" Header="Czas wylogowania" Width="Auto" />
+                            <DataGridTextColumn Binding="{Binding  Path=online}" Header="Czas pracy" Width="Auto" />
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Click="ShowDetails">Informacje</Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button Content="Odśwież" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="166" Click="Button_Click"/>
+                    <Button Name="DodajUzytkownikaButton" Content="Dodaj nowego użytkownika" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="166" Click="DodajUzytkownikaButton_Click"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</Window>

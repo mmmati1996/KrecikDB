@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="09a33e972b9a4b1686dca0394d972d43" Name="Diagram1" ZoomLevel="72" >
+        <EntityTypeShape EntityType="Model1.Dostawy" Width="1.75" PointX="0.625" PointY="1.5" />
+        <EntityTypeShape EntityType="Model1.Dostawy_szczegoly" Width="1.75" PointX="3.625" PointY="0.5" />
+        <AssociationConnector Association="Model1.Dostawy_szczegolyDostawy" />
+        <EntityTypeShape EntityType="Model1.Magazyn_glowny" Width="1.5" PointX="6.375" PointY="0.5" />
+        <EntityTypeShape EntityType="Model1.Kategorie_produktow" Width="1.5" PointX="8.875" PointY="1.375" />
+        <EntityTypeShape EntityType="Model1.Identyfikatory_produktow" Width="1.5" PointX="7.375" PointY="3.625" />
+        <EntityTypeShape EntityType="Model1.Zamowienia" Width="1.5" PointX="4.875" PointY="3.125" />
+        <EntityTypeShape EntityType="Model1.Dostawcy" Width="1.5" PointX="2.75" PointY="3.25" />
+        <EntityTypeShape EntityType="Model1.Klienci" Width="1.5" PointX="7.625" PointY="6.625" />
+        <EntityTypeShape EntityType="Model1.Faktury" Width="1.5" PointX="3.875" PointY="7.125" />
+        <AssociationConnector Association="Model1.DostawcyDostawy" />
+        <AssociationConnector Association="Model1.FakturyDostawy" />
+        <AssociationConnector Association="Model1.FakturyKlienci" />
+        <AssociationConnector Association="Model1.KlienciZamowienia" />
+        <AssociationConnector Association="Model1.FakturyZamowienia" />
+        <AssociationConnector Association="Model1.Magazyn_glownyDostawy_szczegoly" />
+        <AssociationConnector Association="Model1.DostawcyMagazyn_glowny" />
+        <AssociationConnector Association="Model1.Identyfikatory_produktowMagazyn_glowny" />
+        <AssociationConnector Association="Model1.Identyfikatory_produktowZamowienia" />
+        <AssociationConnector Association="Model1.Kategorie_produktowMagazyn_glowny" />
+        <AssociationConnector Association="Model1.Kategorie_produktowIdentyfikatory_produktow" />
+        <EntityTypeShape EntityType="Model1.Imiona_Klientow_View" Width="1.5" PointX="0.75" PointY="7.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
